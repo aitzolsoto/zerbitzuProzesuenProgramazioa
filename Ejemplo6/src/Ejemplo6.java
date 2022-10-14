@@ -16,7 +16,7 @@ import java.io.OutputStream;
 public class Ejemplo6 {
     public static void main(String[] args) {
         Runtime r = Runtime.getRuntime();
-        String comando = "cmd /c java -jar EjemploLectura.jar";
+        String comando = "java -jar C:\\Users\\soto.aitzol\\Desktop\\zerbitzuProzesuenProgramazioa\\EjemploLectura\\dist\\EjemploLectura.jar";
         Process p=null;
         try{
             p = r.exec(comando);
@@ -25,7 +25,13 @@ public class Ejemplo6 {
             os.write("Hola Manuel\n".getBytes());
             os.flush();//vacia el buffer de salida
             
-            
+            InputStream is = p.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String linea;
+            while((linea = br.readLine())!= null){
+                System.out.println(linea);
+            }
+            br.close();
         }catch(Exception e){
             e.printStackTrace();
         }
